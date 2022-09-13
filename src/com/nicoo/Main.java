@@ -5,88 +5,230 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Main extends JPanel implements ActionListener {
-    private JButton btn_1;
-    private JButton btn_2;
-    private JButton btn_3;
-    private JButton btn_4;
-    private JButton btn_5;
-    private JButton btn_6;
-    private JButton btn_7;
-    private JButton btn_8;
-    private JButton btn_9;
+    private JButton btn_one;
+    private JButton btn_two;
+    private JButton btn_nine;
+    private JButton btn_four;
+    private JButton btn_seven;
+    private JButton btn_eight;
+    private JButton btn_three;
+    private JButton btn_five;
+    private JButton btn_six;
     private JButton reset_btn;
     private JLabel playerOne;
     private JLabel playerTwo;
     private JLabel pOneScore;
     private JLabel pTwoScore;
+    private int pOneWin = 1;
+    private int pTwoWin = 1;
+    private String player;
 
-    private int playerOneScoreCount, playerTwoScoreCount, roundCount;
-
-    boolean activePlayer;
+    int roundCount = 1;
+    boolean win;
 
     public Main() {
         //construct components
-        reset_btn = new JButton ("Reset");
-        playerOne = new JLabel ("X");
-        playerTwo = new JLabel ("O");
-        pOneScore = new JLabel ("newLabel");
-        pTwoScore = new JLabel ("newLabel");
+        reset_btn = new JButton("Reset Game");
+
+        playerOne = new JLabel("X");
+        playerTwo = new JLabel("O");
+
+        pOneScore = new JLabel("Score: " + (pOneWin - 1));
+        pTwoScore = new JLabel("Score: " + (pTwoWin - 1));
 
         JButton[] buttons = new JButton[]{
-                btn_1 = new JButton ("1"), btn_2 = new JButton ("2"), btn_3 = new JButton ("3"),
-        btn_4 = new JButton ("4"),
-        btn_5 = new JButton ("5"),
-        btn_6 = new JButton ("6"),
-        btn_7 = new JButton ("7"),
-        btn_8 = new JButton ("8"),
-        btn_9 = new JButton ("9"),
+                btn_one = new JButton("-"), btn_two = new JButton("-"), btn_nine = new JButton("-"),
+                btn_four = new JButton("-"),
+                btn_seven = new JButton("-"),
+                btn_eight = new JButton("-"),
+                btn_three = new JButton("-"),
+                btn_five = new JButton("-"),
+                btn_six = new JButton("-"),
         };
-
-
         //adjust size and set layout
-        setPreferredSize (new Dimension (346, 504));
-        setLayout (null);
+        setPreferredSize(new Dimension(346, 504));
+        setLayout(null);
 
         //add components
-        for (int i = 0; i <buttons.length ; i++) {
-            add(buttons[i]);
+        for (JButton button : buttons) {
+            add(button);
         }
-        add (reset_btn);
-        add (playerOne);
-        add (playerTwo);
-        add (pOneScore);
-        add (pTwoScore);
+        add(reset_btn);
+        add(playerOne);
+        add(playerTwo);
+        add(pOneScore);
+        add(pTwoScore);
 
-        btn_1.addActionListener(this);
+        for (JButton bu : buttons
+        ) {
+            bu.addActionListener(this);
+        }
+
+        reset_btn.addActionListener(this);
+
+
         //set component bounds (only needed by Absolute Positioning)
-        btn_1.setBounds (25, 135, 90, 90);
-        btn_2.setBounds (135, 135, 90, 90);
-        btn_3.setBounds (240, 355, 90, 90);
-        btn_4.setBounds (25, 245, 90, 90);
-        btn_5.setBounds (25, 355, 90, 90);
-        btn_6.setBounds (135, 355, 90, 90);
-        btn_7.setBounds (240, 135, 90, 90);
-        btn_8.setBounds (135, 245, 90, 90);
-        btn_9.setBounds (240, 245, 90, 90);
-        reset_btn.setBounds (25, 460, 310, 30);
-        playerOne.setBounds (20, 10, 125, 50);
-        playerTwo.setBounds (20, 75, 120, 50);
-        pOneScore.setBounds (235, 10, 125, 50);
-        pTwoScore.setBounds (235, 65, 125, 50);
+        btn_one.setBounds(25, 135, 90, 90);
+        btn_two.setBounds(135, 135, 90, 90);
+        btn_nine.setBounds(240, 355, 90, 90);
+        btn_four.setBounds(25, 245, 90, 90);
+        btn_seven.setBounds(25, 355, 90, 90);
+        btn_eight.setBounds(135, 355, 90, 90);
+        btn_three.setBounds(240, 135, 90, 90);
+        btn_five.setBounds(135, 245, 90, 90);
+        btn_six.setBounds(240, 245, 90, 90);
+
+        reset_btn.setBounds(185, 460, 145, 30);
+        playerOne.setBounds(20, 10, 125, 50);
+        playerTwo.setBounds(20, 65, 120, 50);
+        pOneScore.setBounds(235, 10, 125, 50);
+        pTwoScore.setBounds(235, 65, 125, 50);
+    }
+
+    static JFrame frame = new JFrame("Tic Tac Toe");
+    public static void main(String[] args) {
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new Main());
+        frame.pack();
+        frame.setVisible(true);
+    }
+// p1 0
+    // p2 1
+    // empty "-"
+
+    public void turn() {
+        if (roundCount % 2 != 0) {
+            player = "X";
+        } else {
+            player = "O";
+        }
+        roundCount++;
+    }
+
+    void win() {
+        if (btn_one.getText() == btn_two.getText() && btn_two.getText() == btn_three.getText() && btn_two.getText() != "-") {
+            win = true;
+        } else if (btn_four.getText() == btn_five.getText() && btn_five.getText() == btn_six.getText() && btn_five.getText() != "-") {
+            win = true;
+        } else if (btn_seven.getText() == btn_eight.getText() && btn_eight.getText() == btn_nine.getText() && btn_eight.getText() != "-") {
+            win = true;
+        } else if (btn_one.getText() == btn_four.getText() && btn_four.getText() == btn_seven.getText() && btn_four.getText() != "-") {
+            win = true;
+        } else if (btn_two.getText() == btn_five.getText() && btn_five.getText() == btn_eight.getText() && btn_eight.getText() != "-") {
+            win = true;
+        } else if (btn_three.getText() == btn_six.getText() && btn_six.getText() == btn_nine.getText() && btn_six.getText() != "-") {
+            win = true;
+        } else if (btn_one.getText() == btn_five.getText() && btn_five.getText() == btn_nine.getText() && btn_five.getText() != "-") {
+            win = true;
+        } else if (btn_three.getText() == btn_five.getText() && btn_five.getText() == btn_seven.getText() && btn_five.getText() != "-") {
+            win = true;
+        }
+
+    }
+
+    public void scoreInput() {
+        if (player == "X" && win == true) {
+            pOneScore.setText("Score: " + (pTwoWin++));
+            win = false;
+        } else if (player == "O" && win == true) {
+            pTwoScore.setText("Score: " + (pOneWin++));
+            win = false;
+        }
+    }
+
+    public void hasWon() {
+        if (win) {
+            JOptionPane.showMessageDialog(frame, "Player " + player + " has won!");
+            btn_one.setText("-");
+            btn_two.setText("-");
+            btn_three.setText("-");
+            btn_four.setText("-");
+            btn_five.setText("-");
+            btn_six.setText("-");
+            btn_seven.setText("-");
+            btn_eight.setText("-");
+            btn_nine.setText("-");
+
+            roundCount = 1;
+
+        }
+    }
+
+    public void hasTied() {
+        if (roundCount > 9) {
+            JOptionPane.showMessageDialog(frame, "Game Tied!");
+            btn_one.setText("-");
+            btn_two.setText("-");
+            btn_three.setText("-");
+            btn_four.setText("-");
+            btn_five.setText("-");
+            btn_six.setText("-");
+            btn_seven.setText("-");
+            btn_eight.setText("-");
+            btn_nine.setText("-");
+
+            roundCount = 1;
+            win = false;
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        turn();
+
+        if (e.getSource() == btn_one) {
+            btn_one.setText(player);
+            System.out.println("btn1");
+        } else if (e.getSource() == btn_two) {
+            btn_two.setText(player);
+            System.out.println("btn 2");
+        } else if (e.getSource() == btn_nine) {
+            btn_nine.setText(player);
+            System.out.println("btn nine");
+        } else if (e.getSource() == btn_four) {
+            btn_four.setText(player);
+            System.out.println("btn 4");
+        } else if (e.getSource() == btn_seven) {
+            btn_seven.setText(player);
+            System.out.println("btn seven");
+        } else if (e.getSource() == btn_eight) {
+            btn_eight.setText(player);
+            System.out.println("eight");
+        } else if (e.getSource() == btn_three) {
+            btn_three.setText(player);
+            System.out.println("three");
+        } else if (e.getSource() == btn_five) {
+            btn_five.setText(player);
+            System.out.println("btn five");
+        } else if (e.getSource() == btn_six) {
+            btn_six.setText(player);
+            System.out.println("six");
+        }
+        win();
+        System.out.println(win);
+        hasWon();
+
+        scoreInput();
+
+        if (e.getSource() == reset_btn) {
+
+            pOneWin = 0;
+            pTwoWin = 0;
+            pOneScore.setText("Score: " + pOneWin);
+            pTwoScore.setText("Score: " + pTwoWin);
+            btn_one.setText("-");
+            btn_two.setText("-");
+            btn_three.setText("-");
+            btn_four.setText("-");
+            btn_five.setText("-");
+            btn_six.setText("-");
+            btn_seven.setText("-");
+            btn_eight.setText("-");
+            btn_nine.setText("-");
+
+            win = false;
+        }
+        hasTied();
 
     }
-
-    public static void main (String[] args) {
-        JFrame frame = new JFrame ("MyPanel");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new Main());
-        frame.pack();
-        frame.setVisible (true);
-    }
-
-
 }
