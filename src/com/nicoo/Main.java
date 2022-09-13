@@ -155,7 +155,8 @@ public class Main extends JPanel implements ActionListener {
     }
 
     public void hasTied() {
-        if (roundCount > 9) {
+        if (btn_one.getText() != "-" && btn_two.getText() != "-"&& btn_three.getText() != "-" && btn_four.getText() !="-" && btn_five.getText() !="-" && btn_six.getText() != "-" && btn_seven.getText() != "-" && btn_eight.getText() !="-"&& btn_nine.getText()!= "-")
+        {
             JOptionPane.showMessageDialog(frame, "Game Tied!");
             btn_one.setText("-");
             btn_two.setText("-");
@@ -177,32 +178,68 @@ public class Main extends JPanel implements ActionListener {
         turn();
 
         if (e.getSource() == btn_one) {
+            if (player == "X" && btn_one.getText() != "O"){
             btn_one.setText(player);
             System.out.println("btn1");
+            }else if(player == "O" && btn_one.getText() != "X"){
+                btn_one.setText(player);
+            }
         } else if (e.getSource() == btn_two) {
-            btn_two.setText(player);
-            System.out.println("btn 2");
+            if (player == "X" && btn_two.getText() != "O"){
+                btn_two.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_two.getText() != "X"){
+                btn_two.setText(player);
+            }
         } else if (e.getSource() == btn_nine) {
-            btn_nine.setText(player);
-            System.out.println("btn nine");
+            if (player == "X" && btn_nine.getText() != "O"){
+                btn_nine.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_nine.getText() != "X"){
+                btn_nine.setText(player);
+            }
         } else if (e.getSource() == btn_four) {
-            btn_four.setText(player);
-            System.out.println("btn 4");
+            if (player == "X" && btn_four.getText() != "O"){
+                btn_four.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_four.getText() != "X"){
+                btn_four.setText(player);
+            }
         } else if (e.getSource() == btn_seven) {
-            btn_seven.setText(player);
-            System.out.println("btn seven");
+            if (player == "X" && btn_seven.getText() != "O"){
+                btn_seven.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_seven.getText() != "X"){
+                btn_seven.setText(player);
+            }
         } else if (e.getSource() == btn_eight) {
-            btn_eight.setText(player);
-            System.out.println("eight");
+            if (player == "X" && btn_eight.getText() != "O"){
+                btn_eight.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_eight.getText() != "X"){
+                btn_eight.setText(player);
+            }
         } else if (e.getSource() == btn_three) {
-            btn_three.setText(player);
-            System.out.println("three");
+            if (player == "X" && btn_three.getText() != "O"){
+                btn_three.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_three.getText() != "X"){
+                btn_three.setText(player);
+            }
         } else if (e.getSource() == btn_five) {
-            btn_five.setText(player);
-            System.out.println("btn five");
+            if (player == "X" && btn_five.getText() != "O"){
+                btn_five.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_five.getText() != "X"){
+                btn_five.setText(player);
+            }
         } else if (e.getSource() == btn_six) {
-            btn_six.setText(player);
-            System.out.println("six");
+            if (player == "X" && btn_six.getText() != "O"){
+                btn_six.setText(player);
+                System.out.println("btn1");
+            }else if(player == "O" && btn_six.getText() != "X"){
+                btn_six.setText(player);
+            }
         }
         win();
         System.out.println(win);
